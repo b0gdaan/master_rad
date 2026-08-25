@@ -31,7 +31,23 @@ replot_figures.py         redraws dataset figures from cached data
 setup_dirs.py             creates the output tree
 tests/test_pipeline.py    regression tests over the generated outputs
 config.yaml               experiment configuration
+
+notebooks/
+    01_EDA_Dataset            dataset overview, price and volatility figures
+    02_GridSearch             cross-validated hyperparameter search
+    03_Model_Comparison       model-ranking charts
+    04_DM_Tests_Visuals       Diebold-Mariano heatmap, representative forecast
+    05_XGB_vs_DCC             rolling RMSE, error scatter and distributions
+    06_Regime_Analysis        regime catalogue, regime-conditional errors
+    07_Robustness_Checks      refit and threshold sweeps, bootstrap intervals
+    08_Market_Events_Showcase per-event diagnostics, correlation regime map
+    09_Feature_Ablation       nested feature-group ablation
 ```
+
+The notebooks produce most of the figures; the pipeline alone does not. They run
+after `main.py`, since they read from `outputs/`. Each locates the project root
+by searching upward for `config.yaml`, so they work both from `notebooks/` and
+from the project root.
 
 ## Running
 
@@ -44,13 +60,13 @@ A full run takes roughly two hours on a desktop CPU with a CUDA-capable GPU for
 XGBoost; set `xgb_device: cpu` in `config.yaml` if none is available.
 
 ```
-python run_all.py --skip-latex --skip-notebooks    # pipeline + tests
-python run_ablation.py                             # ablation, needs a prior run
-python run_all.py --tests-only                     # tests against existing outputs
+python run_all.py --skip-latex     # pipeline, notebooks, tests
+python run_ablation.py             # ablation, needs a prior run
+python run_all.py --tests-only     # tests against existing outputs
 ```
 
-The `--skip-latex` and `--skip-notebooks` flags are required here: the document
-sources and analysis notebooks are not part of this repository.
+`--skip-latex` is required here: the document sources are not part of this
+repository.
 
 ## Output
 
