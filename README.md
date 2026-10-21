@@ -1,4 +1,4 @@
-# master_rad
+# Intermarket Dependency Forecasting
 
 Research pipeline for forecasting time-varying intermarket dependency between
 Bitcoin and conventional assets.
@@ -6,7 +6,7 @@ Bitcoin and conventional assets.
 The target is the rolling Pearson correlation between a base cryptocurrency and
 a conventional asset, Fisher-transformed and forecast one step ahead. Ten model
 specifications are evaluated under an expanding-window walk-forward, including a
-leakage-safe DCC-GARCH(1,1) benchmark. A second stage turns the dependency
+walk-forward DCC-GARCH(1,1) benchmark. A second stage turns the dependency
 forecast into a binary stress classifier.
 
 Code only. Prices are downloaded on first run and cached; all metrics, figures
@@ -99,12 +99,20 @@ data/processed/        derived log returns
 
 ## Reproducibility
 
-Runs are deterministic given the cached price file and the seed in
-`config.yaml`. No step reads system time or an unpinned remote source. XGBoost
-on GPU may differ in the last bits across hardware; set `xgb_device: cpu` for
-bit-identical output.
+Reuse the same cached prices, configuration, dependency versions and seed when
+comparing runs. A fresh Yahoo Finance download can change historical inputs.
+Hardware, numerical libraries and GPU execution can also affect results; a CPU
+setting alone does not guarantee bit-identical output across machines.
 
 ## Requirements
 
 Python 3.11+. Pinned versions in `requirements.txt`; the numerical core is
 numpy, pandas, scikit-learn, xgboost, arch and statsmodels.
+
+## Related materials and interpretation
+
+[Full thesis and reported results](https://github.com/b0gdaan/master-thesis).
+The target is a persistent, overlapping rolling statistic. Compare complex models
+with the last-value baseline, not only with DCC-GARCH. DCC conditional correlation
+and rolling Pearson correlation are different estimands. Reported superiority over
+that benchmark does not by itself demonstrate economic value or a trading edge.
