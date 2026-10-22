@@ -1,5 +1,11 @@
 # Intermarket Dependency Forecasting
 
+**[Open Dependency Lab — interactive project site](https://b0gdaan.github.io/master-thesis/)**
+
+The research code and thesis share one GitHub Pages site, with a model demonstrator,
+methodology and reported results. The demonstrator explains model mechanics;
+it is not a live forecast service. [Full thesis](https://github.com/b0gdaan/master-thesis).
+
 Research pipeline for forecasting time-varying intermarket dependency between
 Bitcoin and conventional assets.
 
